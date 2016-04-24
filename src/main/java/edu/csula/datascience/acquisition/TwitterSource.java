@@ -50,9 +50,9 @@ public class TwitterSource implements Source<Tweet> {
 		List<Tweet> list = Lists.newArrayList();
 
 		if (curs.hasNext()) {
-			
+
 			DBObject o = curs.next();
-			
+
 			this.address = (String) o.get("full_address");
 			this.restaurant_name = (String) o.get("name");
 			this.restaurant_name = restaurant_name.replaceAll(" ", "");
@@ -62,18 +62,16 @@ public class TwitterSource implements Source<Tweet> {
 				city = "#Pittsburgh";
 			} else {
 			}
-			//System.out.println(city);
-			//System.out.println(restaurant_name);
 			TwitterCriteria criteria = TwitterCriteria.create().setQuerySearch("#" + this.restaurant_name + city)
-					.setMaxTweets(10);
-//			for(Tweet t : TweetManager.getTweets(criteria)) {
-//				System.out.println(t.getText());
-//			}
-			
+					.setMaxTweets(50);
+			try {
 			list.addAll(TweetManager.getTweets(criteria));
+			} catch(Exception e) {
+				System.out.println("corrupted response from server");
+			}
 
 		} else {
-			
+
 			this.setFlag(false);
 		}
 		// take one business by calling iterator.next()

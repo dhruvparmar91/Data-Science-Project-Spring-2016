@@ -8,15 +8,17 @@ public class YelpCollectorApp {
 
 	public static void main(String[] args) {
 
-		String[] files = { "business.json", "review.json", "tip.json", "user.json", "checkin.json" };
+//		String[] files = { "business.json", "review.json", "tip.json", "user.json", "checkin.json" };
 
+		String[] files = { "business.json"};
+		
 		for (int i = 0; i < files.length; i++) {
 
 			String filename = files[i];
 			// initialize source with a filename
 			YelpSource source = null;
 			try {
-				source = new YelpSource("/Users/dhruvparmar91/desktop/" + filename);
+				source = new YelpSource("/Users/shreyvithalani/desktop/" + filename);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
